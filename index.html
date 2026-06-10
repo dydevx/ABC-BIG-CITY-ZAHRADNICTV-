@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ABC BIG CITY ZAHRADNICTVÍ | Květiny a zahradnictví Ostrov</title>
+  <meta name="description" content="ABC BIG CITY ZAHRADNICTVÍ nabízí květiny, okrasné rostliny a zahradní sortiment v Ostrově. Navštivte nás na adrese Jáchymovská 1499.">
+  <meta name="keywords" content="květiny Ostrov, zahradnictví Ostrov, rostliny, květinářství, ABC BIG CITY ZAHRADNICTVÍ">
+  <meta property="og:title" content="ABC BIG CITY ZAHRADNICTVÍ | Květiny a zahradnictví Ostrov">
+  <meta property="og:description" content="Čerstvé květiny, okrasné rostliny a zahradní sortiment přímo v Ostrově.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="7354b253406769016475161cd2ba1f011bd35ec3.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>document.documentElement.classList.add("js");</script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="loader" id="loader"></div>
+
+  <div class="top-bar">
+    <span>Adresa: Jáchymovská 1499, 363 01 Ostrov</span>
+    <span>Telefon: <a href="tel:+420728635998">+420 728 635 998</a></span>
+    <span>Otevřeno každý den: 8:30 - 19:00</span>
+  </div>
+
+  <header class="site-header">
+    <nav class="navbar">
+      <a href="#home" class="brand" aria-label="ABC BIG CITY ZAHRADNICTVÍ">
+        <img src="logo.png" alt="ABC BIG CITY ZAHRADNICTVÍ logo" onerror="this.style.display='none'">
+        <span>ABC BIG CITY ZAHRADNICTVÍ</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Otevřít menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="#home">Domů</a>
+        <a href="#produkty">Produkty</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#onas">O nás</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+      <div class="nav-actions">
+        <button class="cart-button" id="openCart" aria-label="Otevřít košík">Košík <span id="cartCount">0</span></button>
+        <a class="call-button" href="tel:+420728635998">Zavolat</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-inner fade-in">
+        <div class="hero-visual" aria-label="Ukázka rostlin">
+          <div class="hero-image-panel">
+            <img src="Hydragea k23 mix color.jpg" alt="Hydrangea Mix Color">
+          </div>
+          <div class="hero-product-panel">
+            <span>Aktuální nabídka</span>
+            <strong>500+ rostlin a květin</strong>
+            <p>Výběr pro zahradu, balkon i interiér přímo v Ostrově.</p>
+          </div>
+        </div>
+        <div class="hero-content">
+          <p class="eyebrow">Lokální zahradnictví v Ostrově</p>
+          <h1>Květiny, rostliny a zahradní krásy pro každý domov</h1>
+          <p>Objevte široký výběr květin, okrasných rostlin a zahradních doplňků přímo v Ostrově. Nabízíme čerstvé, kvalitní a pečlivě vybrané rostliny pro váš dům, balkon i zahradu.</p>
+          <div class="hero-actions">
+            <a href="#produkty" class="btn primary">Zobrazit produkty</a>
+            <a href="#kontakt" class="btn secondary">Kontaktovat nás</a>
+          </div>
+        </div>
+        <div class="hero-info">
+          <span>Každý den 8:30 - 19:00</span>
+          <span>Jáchymovská 1499, Ostrov</span>
+          <span>Čerstvé rostliny každý týden</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section filters-section fade-in" id="produkty">
+      <div class="section-heading">
+        <p class="eyebrow">Online katalog</p>
+        <h2>Vyberte si z naší nabídky</h2>
+      </div>
+      <div class="catalog-panel">
+        <div class="catalog-panel-head">
+          <div>
+            <strong>Rychlý výběr produktů</strong>
+            <span id="filterStatus">Zobrazeny všechny produkty</span>
+          </div>
+          <span class="catalog-count" id="catalogCount">0 produktů</span>
+        </div>
+        <div class="filters">
+          <label class="filter-field">
+            <span>Hledat</span>
+            <input type="search" id="searchInput" placeholder="Vyhledat rostlinu nebo květinu...">
+          </label>
+          <label class="filter-field">
+            <span>Kategorie</span>
+            <select id="categoryFilter" aria-label="Kategorie">
+              <option value="all">Vše</option>
+              <option value="Květiny">Květiny</option>
+              <option value="Zahradní rostliny">Zahradní rostliny</option>
+              <option value="Levandule">Levandule</option>
+              <option value="Hydrangea">Hydrangea</option>
+              <option value="Pelargonie">Pelargonie</option>
+              <option value="Salvia">Salvia</option>
+              <option value="Ostatní">Ostatní</option>
+            </select>
+          </label>
+          <label class="filter-field">
+            <span>Cena</span>
+            <select id="priceFilter" aria-label="Cena">
+              <option value="all">Vše</option>
+              <option value="0-50">Do 50 Kč</option>
+              <option value="50-100">50-100 Kč</option>
+              <option value="100-200">100-200 Kč</option>
+              <option value="200-Infinity">Nad 200 Kč</option>
+            </select>
+          </label>
+          <button class="btn outline" id="resetFilters">Vymazat filtr</button>
+        </div>
+      </div>
+      <div class="category-strip" id="categoryStrip"></div>
+    </section>
+
+    <section class="section fade-in">
+      <div class="section-heading split">
+        <div>
+          <p class="eyebrow">Doporučujeme</p>
+          <h2>Oblíbené produkty</h2>
+        </div>
+      </div>
+      <div class="products-grid" id="featuredGrid"></div>
+    </section>
+
+    <section class="section all-products fade-in">
+      <div class="section-heading split">
+        <div>
+          <p class="eyebrow">Katalog</p>
+          <h2>Všechny produkty</h2>
+        </div>
+        <p id="resultCount" class="result-count"></p>
+      </div>
+      <div class="products-grid" id="productsGrid"></div>
+      <p class="empty-state" id="emptyState">Žádné produkty nebyly nalezeny.</p>
+      <button class="btn primary load-more" id="loadMore">Zobrazit více</button>
+    </section>
+
+    <section class="section order-section fade-in" id="objednavka">
+      <div class="section-heading">
+        <p class="eyebrow">Rezervace a objednávka</p>
+        <h2>Objednávkový formulář</h2>
+      </div>
+      <form class="order-form" id="orderForm">
+        <div class="form-grid">
+          <label>Jméno a příjmení <input type="text" id="customerName" required></label>
+          <label>Telefon <input type="tel" id="customerPhone" required></label>
+          <label>E-mail <input type="email" id="customerEmail"></label>
+          <label>Adresa doručení <input type="text" id="customerAddress"></label>
+        </div>
+        <label>Poznámka <textarea id="customerNote" rows="4"></textarea></label>
+        <div class="order-summary">
+          <h3>Vybrané produkty</h3>
+          <div id="orderItems">Váš košík je prázdný.</div>
+          <strong>Celkem: <span id="orderTotal">0 Kč</span></strong>
+        </div>
+        <p class="form-message" id="formMessage"></p>
+        <button class="btn primary" type="submit">Odeslat objednávku</button>
+      </form>
+    </section>
+
+    <section class="section gallery-section fade-in" id="galerie">
+      <div class="section-heading">
+        <p class="eyebrow">Inspirace</p>
+        <h2>Galerie zahradnictví</h2>
+      </div>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </section>
+
+    <section class="section about-section fade-in" id="onas">
+      <div class="about-text">
+        <p class="eyebrow">O nás</p>
+        <h2>ABC BIG CITY ZAHRADNICTVÍ</h2>
+        <p>ABC BIG CITY ZAHRADNICTVÍ je lokální zahradnictví v Ostrově, které nabízí široký výběr květin, okrasných rostlin, balkonových rostlin a zahradního sortimentu. Naším cílem je přinášet zákazníkům kvalitní rostliny, příjemný servis a inspiraci pro krásnější domov i zahradu.</p>
+      </div>
+      <img src="Salvia k19.jpg" alt="Zahradnictví v Ostrově" onerror="this.src='images/products/placeholder.jpg'">
+    </section>
+
+    <section class="section why-section fade-in">
+      <div class="section-heading">
+        <p class="eyebrow">Proč k nám</p>
+        <h2>Proč zvolit naše zahradnictví</h2>
+      </div>
+      <div class="benefits-grid">
+        <article><h3>Široký výběr rostlin</h3><p>Nabízíme stovky druhů květin a zahradních rostlin.</p></article>
+        <article><h3>Čerstvé a kvalitní zboží</h3><p>Pečlivě vybíráme rostliny pro dlouhou životnost a krásný vzhled.</p></article>
+        <article><h3>Osobní poradenství</h3><p>Rádi poradíme s výběrem i péčí o rostliny.</p></article>
+        <article><h3>Lokální zahradnictví</h3><p>Najdete nás přímo v Ostrově.</p></article>
+      </div>
+    </section>
+
+    <section class="section reviews-section fade-in" id="hodnoceni">
+      <div class="section-heading">
+        <p class="eyebrow">Hodnocení</p>
+        <h2>Co říkají zákazníci</h2>
+      </div>
+      <div class="reviews-layout">
+        <div class="review-score">
+          <span class="score-number">4.9</span>
+          <span class="score-stars">★★★★★</span>
+          <strong>Lokální zákazníci doporučují</strong>
+          <p>Osobní přístup, zdravé rostliny a dobrý výběr pro zahradu i balkon.</p>
+          <div class="score-grid">
+            <span><b>500+</b> produktů</span>
+            <span><b>7/7</b> otevřeno</span>
+          </div>
+        </div>
+        <div class="review-slider">
+          <button class="slider-btn" id="prevReview" aria-label="Předchozí recenze">‹</button>
+          <article class="review-card" id="reviewCard"></article>
+          <button class="slider-btn" id="nextReview" aria-label="Další recenze">›</button>
+          <div class="review-dots" id="reviewDots"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section fade-in" id="kontakt">
+      <div class="contact-card">
+        <p class="eyebrow">Kontakt</p>
+        <h2>Navštivte nás v Ostrově</h2>
+        <dl>
+          <dt>Adresa:</dt><dd>Jáchymovská 1499, 363 01 Ostrov</dd>
+          <dt>Telefon:</dt><dd><a href="tel:+420728635998">+420 728 635 998</a></dd>
+          <dt>Otevírací doba:</dt><dd>Každý den: 8:30 - 19:00</dd>
+        </dl>
+        <div class="contact-actions">
+          <a class="btn primary" href="tel:+420728635998">Zavolat</a>
+          <a class="btn secondary" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=J%C3%A1chymovsk%C3%A1%201499%2C%20363%2001%20Ostrov">Otevřít Google Maps</a>
+        </div>
+      </div>
+      <iframe title="Google Maps - ABC Shopping Paradise" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d159.2268405859053!2d12.945758960825064!3d50.317506835831715!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a0a1ecd519df6b%3A0x1d54c9eca95cdd3f!2sABC%20Shopping%20Paradise!5e0!3m2!1svi!2s!4v1781065128403!5m2!1svi!2s" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+  </main>
+
+  <aside class="cart-sidebar" id="cartSidebar" aria-hidden="true">
+    <div class="cart-header">
+      <h2>Košík</h2>
+      <button id="closeCart" aria-label="Zavřít košík">×</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <strong>Celkem: <span id="cartTotal">0 Kč</span></strong>
+      <button class="btn primary" id="checkoutButton">Pokračovat k objednávce</button>
+      <button class="btn outline" id="clearCart">Vyprázdnit košík</button>
+    </div>
+  </aside>
+  <div class="overlay" id="overlay"></div>
+
+  <div class="modal" id="productModal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="modal-close" id="closeProductModal" aria-label="Zavřít">×</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button id="closeLightbox" aria-label="Zavřít galerii">×</button>
+    <img id="lightboxImage" src="" alt="Galerie">
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <h2>ABC BIG CITY ZAHRADNICTVÍ</h2>
+        <p>Květiny, okrasné rostliny a zahradní sortiment pro domov, balkon i zahradu.</p>
+      </div>
+      <div>
+        <h3>Menu</h3>
+        <a href="#home">Domů</a>
+        <a href="#produkty">Produkty</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+      <div>
+        <h3>Kontakt</h3>
+        <p>Jáchymovská 1499, 363 01 Ostrov</p>
+        <p><a href="tel:+420728635998">+420 728 635 998</a></p>
+        <p>Každý den: 8:30 - 19:00</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Všechna práva vyhrazena | Navrženo společností <a href="#" aria-label="Hoangcaste"><strong>Hoangcaste</strong></a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
