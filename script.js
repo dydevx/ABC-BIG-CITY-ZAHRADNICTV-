@@ -83,7 +83,7 @@ function productCard(product, index = 0) {
         <p>${product.description}</p>
         <strong class="price">${money(product.price)}</strong>
         <div class="card-actions">
-          <button class="btn primary" onclick="addToCart(${product.id}, 1)">Přidat do košíku</button>
+          <button class="btn primary" onclick="addToCart(${product.id}, 1)">Koupit nyní</button>
           <button class="btn outline" onclick="openProductModal(${product.id})">Detail</button>
         </div>
       </div>
@@ -124,6 +124,7 @@ function renderProducts(reset = false) {
   el("catalogCount").textContent = `${list.length} produktů`;
   updateFilterStatus(list.length);
   updateActiveCategory();
+  updateResultHero(list.length);
 }
 
 function renderFeatured() {
@@ -143,6 +144,7 @@ function renderCategories() {
     activeCategory = button.dataset.category;
     el("categoryFilter").value = activeCategory;
     renderProducts(true);
+    jumpToResults();
   });
 }
 
@@ -161,6 +163,32 @@ function updateFilterStatus(count) {
   el("filterStatus").textContent = `${searchPart} · ${category} · ${price} · ${count} výsledků`;
 }
 
+function updateResultHero(count) {
+  const hero = el("resultHero");
+  if (!hero) return;
+  const category = activeCategory === "all" ? "Všechny květiny" : activeCategory;
+  const tone = activeCategory === "all"
+    ? "Vyberte si z celé nabídky čerstvých rostlin a květin."
+    : `Kolekce pro kategorii ${category}, připravená k rychlému výběru.`;
+  hero.innerHTML = `
+    <span>${count} produktů</span>
+    <strong>${category}</strong>
+    <p>${tone}</p>
+  `;
+}
+
+function jumpToResults() {
+  const section = document.querySelector(".all-products");
+  const grid = el("productsGrid");
+  if (!section || !grid) return;
+  grid.classList.remove("products-refresh");
+  void grid.offsetWidth;
+  grid.classList.add("products-refresh");
+  section.scrollIntoView({ behavior: "smooth", block: "start" });
+  const slug = activeCategory === "all" ? "vse" : normalizeText(activeCategory).replace(/\s+/g, "-");
+  history.replaceState(null, "", `#produkty-${slug}`);
+}
+
 function persistCart() {
   localStorage.setItem("abcGardenCart", JSON.stringify(cart));
 }
@@ -173,7 +201,15 @@ function addToCart(productId, quantity = 1) {
   else cart.push({ id: product.id, quantity });
   persistCart();
   renderCart();
+  triggerCartBump();
   openCart();
+}
+
+function triggerCartBump() {
+  const button = el("openCart");
+  button.classList.remove("bump");
+  void button.offsetWidth;
+  button.classList.add("bump");
 }
 
 function changeQuantity(productId, delta) {
@@ -284,8 +320,9 @@ function closeProductModal() {
 
 function renderGallery() {
   el("galleryGrid").innerHTML = galleryImages.map((src, index) => `
-    <button type="button" onclick="openLightbox('${src}')">
+    <button type="button" class="gallery-item gallery-item-${index + 1}" onclick="openLightbox('${src}')" style="--i:${index}">
       <img src="${src}" alt="Galerie ${index + 1}" loading="lazy" onerror="safeImage(this)">
+      <span>${src.replace(/\.[^.]+$/, "").replace(/-/g, " ")}</span>
     </button>
   `).join("");
 }
@@ -373,14 +410,15 @@ function initEvents() {
   });
   document.querySelectorAll(".nav-menu a").forEach((link) => link.addEventListener("click", () => el("navMenu").classList.remove("open")));
   el("searchInput").addEventListener("input", () => renderProducts(true));
-  el("categoryFilter").addEventListener("change", (event) => { activeCategory = event.target.value; renderProducts(true); });
-  el("priceFilter").addEventListener("change", () => renderProducts(true));
+  el("categoryFilter").addEventListener("change", (event) => { activeCategory = event.target.value; renderProducts(true); jumpToResults(); });
+  el("priceFilter").addEventListener("change", () => { renderProducts(true); jumpToResults(); });
   el("resetFilters").addEventListener("click", () => {
     el("searchInput").value = "";
     el("priceFilter").value = "all";
     el("categoryFilter").value = "all";
     activeCategory = "all";
     renderProducts(true);
+    jumpToResults();
   });
   el("loadMore").addEventListener("click", () => { visibleCount += 12; renderProducts(); });
   el("openCart").addEventListener("click", openCart);
@@ -413,6 +451,33 @@ function initAnimations() {
   document.querySelectorAll(".fade-in").forEach((item) => observer.observe(item));
 }
 
+function initPetals() {
+  const field = el("petalField");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!field || reducedMotion || window.innerWidth < 769) return;
+
+  const colors = [
+    ["#f8bfd0", "#e889a8"],
+    ["#ffe0ea", "#f1a9bd"],
+    ["#f5d68f", "#d9b95d"],
+    ["#dfeac9", "#8fac6c"]
+  ];
+
+  Array.from({ length: 22 }).forEach((_, index) => {
+    const petal = document.createElement("span");
+    const [a, b] = colors[index % colors.length];
+    petal.className = "petal";
+    petal.style.setProperty("--x", `${Math.round(Math.random() * 100)}vw`);
+    petal.style.setProperty("--size", `${Math.round(8 + Math.random() * 10)}px`);
+    petal.style.setProperty("--duration", `${Math.round(12 + Math.random() * 10)}s`);
+    petal.style.setProperty("--delay", `${(Math.random() * -18).toFixed(2)}s`);
+    petal.style.setProperty("--drift", `${Math.round(-90 + Math.random() * 180)}px`);
+    petal.style.setProperty("--petal-a", a);
+    petal.style.setProperty("--petal-b", b);
+    field.appendChild(petal);
+  });
+}
+
 window.addEventListener("load", () => {
   setTimeout(() => el("loader").classList.add("hide"), 250);
 });
@@ -426,3 +491,4 @@ restartReviewTimer();
 renderCart();
 initEvents();
 initAnimations();
+initPetals();

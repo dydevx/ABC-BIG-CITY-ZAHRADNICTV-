@@ -12,12 +12,13 @@
   <meta property="og:image" content="7354b253406769016475161cd2ba1f011bd35ec3.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script>document.documentElement.classList.add("js");</script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="loader" id="loader"></div>
+  <div class="petal-field" id="petalField" aria-hidden="true"></div>
 
   <div class="top-bar">
     <span>Adresa: Jáchymovská 1499, 363 01 Ostrov</span>
@@ -54,6 +55,11 @@
         <div class="hero-visual" aria-label="Ukázka rostlin">
           <div class="hero-image-panel">
             <img src="Hydragea k23 mix color.jpg" alt="Hydrangea Mix Color">
+          </div>
+          <div class="hero-flower-collage" aria-hidden="true">
+            <img src="Dahlia xxl k23 mix color.jpg" alt="">
+            <img src="Pelargonie grandiflora k12.jpg" alt="">
+            <img src="Levandule pack 6.jpg" alt="">
           </div>
           <div class="hero-product-panel">
             <span>Aktuální nabídka</span>
@@ -125,14 +131,14 @@
       <div class="category-strip" id="categoryStrip"></div>
     </section>
 
-    <section class="section fade-in">
-      <div class="section-heading split">
+    <section class="section featured-section fade-in">
+      <div class="section-heading featured-heading">
         <div>
           <p class="eyebrow">Doporučujeme</p>
           <h2>Oblíbené produkty</h2>
         </div>
       </div>
-      <div class="products-grid" id="featuredGrid"></div>
+      <div class="products-grid featured-grid" id="featuredGrid"></div>
     </section>
 
     <section class="section all-products fade-in">
@@ -143,6 +149,7 @@
         </div>
         <p id="resultCount" class="result-count"></p>
       </div>
+      <div class="result-hero" id="resultHero" aria-live="polite"></div>
       <div class="products-grid" id="productsGrid"></div>
       <p class="empty-state" id="emptyState">Žádné produkty nebyly nalezeny.</p>
       <button class="btn primary load-more" id="loadMore">Zobrazit více</button>
