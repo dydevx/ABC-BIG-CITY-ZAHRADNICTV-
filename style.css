@@ -476,7 +476,7 @@ h3 { font-size: 1.15rem; font-weight: 900; }
 }
 
 .section { max-width: 1280px; margin: 0 auto; padding: 76px 20px; }
-section[id] { scroll-margin-top: 112px; }
+section[id] { scroll-margin-top: 92px; }
 .section-heading { max-width: 720px; margin-bottom: 28px; }
 .section-heading h2 {
   position: relative;
