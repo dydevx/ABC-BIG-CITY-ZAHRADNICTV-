@@ -76,6 +76,9 @@ function productCard(product, index = 0) {
     <article class="product-card" style="--i:${index}">
       <div class="product-image">
         ${product.badge ? `<span class="badge">${product.badge}</span>` : ""}
+        <span class="product-sprout sprout-one" aria-hidden="true"></span>
+        <span class="product-sprout sprout-two" aria-hidden="true"></span>
+        <span class="product-sprout sprout-three" aria-hidden="true"></span>
         <img src="${product.image}" alt="${product.name}" loading="lazy" onerror="safeImage(this)">
       </div>
       <div class="product-body">
@@ -83,7 +86,7 @@ function productCard(product, index = 0) {
         <p>${product.description}</p>
         <strong class="price">${money(product.price)}</strong>
         <div class="card-actions">
-          <button class="btn primary" onclick="addToCart(${product.id}, 1)">Koupit nyní</button>
+          <button class="btn primary" onclick="addToCart(${product.id}, 1, this)">Koupit nyní</button>
           <button class="btn outline" onclick="openProductModal(${product.id})">Detail</button>
         </div>
       </div>
@@ -193,13 +196,15 @@ function persistCart() {
   localStorage.setItem("abcGardenCart", JSON.stringify(cart));
 }
 
-function addToCart(productId, quantity = 1) {
+function addToCart(productId, quantity = 1, sourceButton = null) {
   const product = products.find((item) => item.id === productId);
   if (!product) return;
   const existing = cart.find((item) => item.id === productId);
   if (existing) existing.quantity += quantity;
   else cart.push({ id: product.id, quantity });
   persistCart();
+  triggerBloomBurst(sourceButton);
+  triggerProductBloom(sourceButton);
   renderCart();
   triggerCartBump();
   openCart();
@@ -210,6 +215,33 @@ function triggerCartBump() {
   button.classList.remove("bump");
   void button.offsetWidth;
   button.classList.add("bump");
+}
+
+function triggerProductBloom(sourceButton) {
+  const card = sourceButton?.closest?.(".product-card");
+  if (!card) return;
+  card.classList.remove("just-added");
+  void card.offsetWidth;
+  card.classList.add("just-added");
+}
+
+function triggerBloomBurst(sourceButton) {
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!sourceButton || reducedMotion) return;
+
+  const burst = document.createElement("span");
+  burst.className = "bloom-burst";
+  sourceButton.appendChild(burst);
+
+  Array.from({ length: 8 }).forEach((_, index) => {
+    const petal = document.createElement("span");
+    petal.className = "bloom-burst-petal";
+    petal.style.setProperty("--angle", `${index * 45}deg`);
+    petal.style.setProperty("--distance", `${24 + (index % 3) * 8}px`);
+    burst.appendChild(petal);
+  });
+
+  burst.addEventListener("animationend", () => burst.remove(), { once: true });
 }
 
 function changeQuantity(productId, delta) {
@@ -297,7 +329,7 @@ function openProductModal(productId) {
         <p>${product.description}</p>
         <label>Množství <input type="number" id="modalQuantity" min="1" value="1"></label>
         <div class="modal-actions">
-          <button class="btn primary" onclick="addModalProduct(${product.id})">Přidat do košíku</button>
+          <button class="btn primary" onclick="addModalProduct(${product.id}, this)">Přidat do košíku</button>
           <button class="btn outline" onclick="closeProductModal()">Zavřít</button>
         </div>
       </div>
@@ -307,9 +339,9 @@ function openProductModal(productId) {
   el("productModal").setAttribute("aria-hidden", "false");
 }
 
-function addModalProduct(productId) {
+function addModalProduct(productId, sourceButton = null) {
   const quantity = Math.max(1, Number(el("modalQuantity").value || 1));
-  addToCart(productId, quantity);
+  addToCart(productId, quantity, sourceButton);
   closeProductModal();
 }
 
@@ -478,6 +510,53 @@ function initPetals() {
   });
 }
 
+function initGardenAmbience() {
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reducedMotion) return;
+
+  const hero = document.querySelector(".hero");
+  const heroVisual = document.querySelector(".hero-visual");
+  if (hero) {
+    hero.insertAdjacentHTML("beforeend", `
+      <div class="garden-ambience" aria-hidden="true">
+        <span class="leaf leaf-a"></span>
+        <span class="leaf leaf-b"></span>
+        <span class="leaf leaf-c"></span>
+        <span class="flower-dot dot-a"></span>
+        <span class="flower-dot dot-b"></span>
+        <span class="flower-dot dot-c"></span>
+      </div>
+    `);
+  }
+
+  if (heroVisual) {
+    heroVisual.insertAdjacentHTML("beforeend", `
+      <div class="hero-vine" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+      </div>
+    `);
+  }
+}
+
+function initScrollGarden() {
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reducedMotion) return;
+
+  const sections = document.querySelectorAll(".section-heading, .catalog-panel, .service-strip article, .occasion-card");
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("garden-reveal");
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.18 });
+
+  sections.forEach((item, index) => {
+    item.style.setProperty("--garden-i", index % 6);
+    observer.observe(item);
+  });
+}
+
 window.addEventListener("load", () => {
   setTimeout(() => el("loader").classList.add("hide"), 250);
 });
@@ -492,3 +571,5 @@ renderCart();
 initEvents();
 initAnimations();
 initPetals();
+initGardenAmbience();
+initScrollGarden();
