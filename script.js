@@ -207,6 +207,7 @@ function addToCart(productId, quantity = 1, sourceButton = null) {
   triggerProductBloom(sourceButton);
   renderCart();
   triggerCartBump();
+  showGardenToast(`${product.name} - pridano do kosiku`);
   openCart();
 }
 
@@ -242,6 +243,19 @@ function triggerBloomBurst(sourceButton) {
   });
 
   burst.addEventListener("animationend", () => burst.remove(), { once: true });
+}
+
+function showGardenToast(message) {
+  const stack = el("toastStack");
+  if (!stack) return;
+
+  const toast = document.createElement("div");
+  toast.className = "garden-toast";
+  toast.textContent = message;
+  stack.appendChild(toast);
+
+  window.setTimeout(() => toast.classList.add("hide"), 2300);
+  window.setTimeout(() => toast.remove(), 2700);
 }
 
 function changeQuantity(productId, delta) {
@@ -557,6 +571,132 @@ function initScrollGarden() {
   });
 }
 
+function initScrollProgress() {
+  const progress = el("scrollProgress");
+  const header = document.querySelector(".site-header");
+  if (!progress) return;
+
+  let ticking = false;
+  const update = () => {
+    const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    const amount = Math.min(1, Math.max(0, window.scrollY / max));
+    progress.style.transform = `scaleX(${amount})`;
+    header?.classList.toggle("scrolled", window.scrollY > 18);
+    ticking = false;
+  };
+
+  const requestUpdate = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  };
+
+  update();
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate);
+}
+
+function initCursorAura() {
+  const aura = el("cursorAura");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!aura || reducedMotion || window.innerWidth < 900) return;
+
+  let lastSparkle = 0;
+  window.addEventListener("pointermove", (event) => {
+    if (event.pointerType === "touch") return;
+    aura.style.opacity = "1";
+    aura.style.transform = `translate3d(${event.clientX - 130}px, ${event.clientY - 130}px, 0)`;
+
+    const now = performance.now();
+    if (now - lastSparkle < 95) return;
+    lastSparkle = now;
+    const sparkle = document.createElement("span");
+    sparkle.className = "sparkle-trail";
+    sparkle.style.left = `${event.clientX}px`;
+    sparkle.style.top = `${event.clientY}px`;
+    document.body.appendChild(sparkle);
+    sparkle.addEventListener("animationend", () => sparkle.remove(), { once: true });
+  }, { passive: true });
+
+  window.addEventListener("pointerleave", () => {
+    aura.style.opacity = "0";
+  });
+}
+
+function initInteractiveTilt() {
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reducedMotion || window.innerWidth < 900) return;
+
+  const selector = ".product-card, .occasion-card, .gallery-grid button, .catalog-panel, .benefits-grid article, .review-card, .contact-card, .order-form";
+  let active = null;
+
+  const reset = (target) => {
+    if (!target) return;
+    target.classList.remove("is-tilting");
+    target.style.removeProperty("--rx");
+    target.style.removeProperty("--ry");
+  };
+
+  document.addEventListener("pointermove", (event) => {
+    const target = event.target.closest(selector);
+    if (!target) {
+      reset(active);
+      active = null;
+      return;
+    }
+
+    if (active && active !== target) reset(active);
+    active = target;
+
+    const rect = target.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 100;
+    const y = ((event.clientY - rect.top) / rect.height) * 100;
+    const rotateY = ((x - 50) / 50) * 4.6;
+    const rotateX = ((50 - y) / 50) * 4.2;
+
+    target.style.setProperty("--mx", `${x.toFixed(1)}%`);
+    target.style.setProperty("--my", `${y.toFixed(1)}%`);
+    target.style.setProperty("--rx", `${rotateX.toFixed(2)}deg`);
+    target.style.setProperty("--ry", `${rotateY.toFixed(2)}deg`);
+    target.classList.add("is-tilting");
+  }, { passive: true });
+
+  document.addEventListener("pointerout", (event) => {
+    const target = event.target.closest(selector);
+    if (!target || target.contains(event.relatedTarget)) return;
+    reset(target);
+    if (active === target) active = null;
+  });
+}
+
+function initHeroParallax() {
+  const hero = document.querySelector(".hero");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!hero || reducedMotion || window.innerWidth < 900) return;
+
+  hero.classList.add("motion-active");
+  hero.addEventListener("pointermove", (event) => {
+    const rect = hero.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 22;
+    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 22;
+    hero.style.setProperty("--hero-image-x", `${(-x * 0.55).toFixed(2)}px`);
+    hero.style.setProperty("--hero-image-y", `${(-y * 0.45).toFixed(2)}px`);
+    hero.style.setProperty("--hero-collage-x", `${(x * 0.42).toFixed(2)}px`);
+    hero.style.setProperty("--hero-collage-y", `${(y * 0.38).toFixed(2)}px`);
+    hero.style.setProperty("--hero-panel-x", `${(x * 0.28).toFixed(2)}px`);
+    hero.style.setProperty("--hero-panel-y", `${(-y * 0.62).toFixed(2)}px`);
+    hero.style.setProperty("--hero-copy-x", `${(x * 0.12).toFixed(2)}px`);
+    hero.style.setProperty("--hero-copy-y", `${(y * 0.12).toFixed(2)}px`);
+  }, { passive: true });
+
+  hero.addEventListener("pointerleave", () => {
+    ["image", "collage", "panel", "copy"].forEach((name) => {
+      hero.style.setProperty(`--hero-${name}-x`, "0px");
+      hero.style.setProperty(`--hero-${name}-y`, "0px");
+    });
+  });
+}
+
 window.addEventListener("load", () => {
   setTimeout(() => el("loader").classList.add("hide"), 250);
 });
@@ -573,3 +713,7 @@ initAnimations();
 initPetals();
 initGardenAmbience();
 initScrollGarden();
+initScrollProgress();
+initCursorAura();
+initInteractiveTilt();
+initHeroParallax();
