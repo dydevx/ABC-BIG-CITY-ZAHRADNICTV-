@@ -3111,6 +3111,14 @@ body::before {
     width: 100%;
     text-align: center;
   }
+
+  .featured-section {
+    padding-bottom: 34px;
+  }
+
+  .all-products {
+    padding-top: 34px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
