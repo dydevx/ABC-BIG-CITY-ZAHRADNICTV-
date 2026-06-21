@@ -35,7 +35,139 @@ const products = [
   { id: 28, name: "Salvia k13", price: 64, category: "Salvia", image: "Salvia k13.jpg", description: "Krásná šalvěj pro zahradu a dlouhotrvající kvetení.", badge: "" }
 ];
 
+const productUpdate20JuneImages = [
+  "Hoa mới update 20-6/  Buxus koule k23 giá 199kc.jpg",
+  "Hoa mới update 20-6/Aeonium k12 giá 33kc.jpg",
+  "Hoa mới update 20-6/Agapanthus k17 giá 189kc.jpg",
+  "Hoa mới update 20-6/Agastache k14 giá 74kc.jpg",
+  "Hoa mới update 20-6/Ajuga k12 giá 55kc.jpg",
+  "Hoa mới update 20-6/Alstroemeria k19 giá 189kc.jpg",
+  "Hoa mới update 20-6/Angelonia k10 giá 25kc.jpg",
+  "Hoa mới update 20-6/Angelonia Trio k12 giá 68kc.jpg",
+  "Hoa mới update 20-6/Antirhinum k12 giá 52kc.jpg",
+  "Hoa mới update 20-6/Argyranthemum k10 giá 41kc.jpg",
+  "Hoa mới update 20-6/Avenella flexuosa k17 giá 119kc.jpg",
+  "Hoa mới update 20-6/Begonie k11 giá 43kc.jpg",
+  "Hoa mới update 20-6/Boungavilea k12 giá 125kc.jpg",
+  "Hoa mới update 20-6/Brachyscome k12 giá 19kc.jpg",
+  "Hoa mới update 20-6/Buddleja k17 giá 149kc.jpg",
+  "Hoa mới update 20-6/Buxus k9 giá 29kc.jpg",
+  "Hoa mới update 20-6/Buxus pyranida k23 giá 359kc.jpg",
+  "Hoa mới update 20-6/Calibrachoa k12 giá 35kc.jpg",
+  "Hoa mới update 20-6/Calistemon k16 giá 203kc.jpg",
+  "Hoa mới update 20-6/Calocephalus k12 giá 36kc.jpg",
+  "Hoa mới update 20-6/Calocephalus, muhlenbeckia k12 giá 59kc.jpg",
+  "Hoa mới update 20-6/Carex k10 giá 36kc.jpg",
+  "Hoa mới update 20-6/Catharanthus roseus k10 giá 19kc.jpg",
+  "Hoa mới update 20-6/Celosia k10 giá 19kc.jpg",
+  "Hoa mới update 20-6/Celosia k12 Trio giá 60 kc.jpg",
+  "Hoa mới update 20-6/Celosia k17 giá 119kc.jpg",
+  "Hoa mới update 20-6/Celosia twist k12 giá 56kc.jpg",
+  "Hoa mới update 20-6/Coreopsis k19 giá 190kc.jpg",
+  "Hoa mới update 20-6/Cortaderia k19 giá 179kc.jpg",
+  "Hoa mới update 20-6/Cupressus 2pat k14 giá 149kc.jpg",
+  "Hoa mới update 20-6/Delphinium k15 giá 105kc.jpg",
+  "Hoa mới update 20-6/Dianthus k12 giá 48kc.jpg",
+  "Hoa mới update 20-6/Dianthus Trio k13 giá 52kc.jpg",
+  "Hoa mới update 20-6/Digitalis k17 giá 149kc.jpg",
+  "Hoa mới update 20-6/Dichondra k11 giá 39kc.jpg",
+  "Hoa mới update 20-6/Echinacea k17 giá 207kc.jpg",
+  "Hoa mới update 20-6/Erysymum k13 giá 47kc.jpg",
+  "Hoa mới update 20-6/Euonymus k10 giá 35kc.jpg",
+  "Hoa mới update 20-6/Euonymus k27 giá 299kc.jpg",
+  "Hoa mới update 20-6/Fargesia k14 giá 89kc.jpg",
+  "Hoa mới update 20-6/Festuca glauca k17 giá 153kc.jpg",
+  "Hoa mới update 20-6/Fuchsia k12 giá 44kc.jpg",
+  "Hoa mới update 20-6/Fuchsie k19 giá 236kc.jpg",
+  "Hoa mới update 20-6/Gazanie k12 giá 40kc.jpg",
+  "Hoa mới update 20-6/Gentiana k13 giá 86kc.jpg",
+  "Hoa mới update 20-6/Gypsophila mix k13 giá 64kc.jpg",
+  "Hoa mới update 20-6/Hedera k13 giá 59kc.jpg",
+  "Hoa mới update 20-6/Hedera k8 giá 26kc.jpg",
+  "Hoa mới update 20-6/Chamaecyparis k13 giá 71kc.jpg",
+  "Hoa mới update 20-6/Chamaecyparis k9 giá 29kc.jpg",
+  "Hoa mới update 20-6/Iberis k13 giá 63kc.jpg",
+  "Hoa mới update 20-6/Ipomoea k12 giá 25kc.jpg",
+  "Hoa mới update 20-6/Jahoda k17 giá 78kc.jpg",
+  "Hoa mới update 20-6/Jahoda poloprevislá stálerodiaca k9 giá 39kc.jpg",
+  "Hoa mới update 20-6/Jasmin k12 giá 60kc.jpg",
+  "Hoa mới update 20-6/Lantana miska k17 giá 99kc.jpg",
+  "Hoa mới update 20-6/Lantana trio giá 41kc.jpg",
+  "Hoa mới update 20-6/Laurus nobilis k10 giá 38kc.jpg",
+  "Hoa mới update 20-6/Lavandule angustifolia k10 giá 29kc.jpg",
+  "Hoa mới update 20-6/Lavandule angustifolia k9 giá 43kc.jpg",
+  "Hoa mới update 20-6/Lavandule k17 giá 81kc.jpg",
+  "Hoa mới update 20-6/Lavandule k26 giá 240kc.jpg",
+  "Hoa mới update 20-6/Leucanthemum k12 giá 57kc.jpg",
+  "Hoa mới update 20-6/Lysimachia k10 giá 25kc.jpg",
+  "Hoa mới update 20-6/Mandevilla k10 giá 48kc.jpg",
+  "Hoa mới update 20-6/Mandevilla k17 giá 199kc.jpg",
+  "Hoa mới update 20-6/Mandevilla k19 giá 299kc.jpg",
+  "Hoa mới update 20-6/Nandina k19 giá 227kc.jpg",
+  "Hoa mới update 20-6/Nephrolepis k19 giá 225kc.jpg",
+  "Hoa mới update 20-6/Nerium k21 giá 285kc.jpg",
+  "Hoa mới update 20-6/Nerium oleander k13 giá 100kc.jpg",
+  "Hoa mới update 20-6/Osteospermum k11 giá 33kc.jpg",
+  "Hoa mới update 20-6/Papaver k12 giá 48kc.jpg",
+  "Hoa mới update 20-6/Petunie k10 giá 29kc.jpg",
+  "Hoa mới update 20-6/Platycladus orientalis k17 giá 117kc.jpg",
+  "Hoa mới update 20-6/Plectranthus k10 giá 19kc.jpg",
+  "Hoa mới update 20-6/Plectranthus purpuratus k11 giá 19kc.jpg",
+  "Hoa mới update 20-6/Rhododendron k13 giá 131kc.jpg",
+  "Hoa mới update 20-6/Rosa be moved k10 giá 57kc.jpg",
+  "Hoa mới update 20-6/Rosa on stem k19 giá 349kc.jpg",
+  "Hoa mới update 20-6/Salvia k13 giá 64kc.jpg",
+  "Hoa mới update 20-6/Sanvitalia k11 giá 34kc.jpg",
+  "Hoa mới update 20-6/Scabiosa k12 giá 59kc.jpg",
+  "Hoa mới update 20-6/Scaevola k12 giá 50kc.jpg",
+  "Hoa mới update 20-6/Sedum k12 giá 52kc.jpg",
+  "Hoa mới update 20-6/Sempervivum cramberry cocktail k12 giá 55kc.jpg",
+  "Hoa mới update 20-6/Sempervivum k18 giá 143kc.jpg",
+  "Hoa mới update 20-6/Sempervivum k19 giá 111kc.jpg",
+  "Hoa mới update 20-6/Streptocarp k12 giá 42kc.jpg",
+  "Hoa mới update 20-6/Taxus k9 giá 29kc.jpg",
+  "Hoa mới update 20-6/Thuja k15 giá 74kc.jpg",
+  "Hoa mới update 20-6/Thuja k27 giá 267kc.jpg",
+  "Hoa mới update 20-6/Thuja k27 giá 499kc.jpg",
+  "Hoa mới update 20-6/Verbena k12 giá 35kc.jpg",
+  "Hoa mới update 20-6/Zantedeschia k14 giá 136kc.jpg"
+];
+
+function productCategoryForName(name) {
+  const normalized = normalizeText(name);
+  if (normalized.includes("lavandule")) return "Levandule";
+  if (normalized.includes("salvia")) return "Salvia";
+  if (normalized.includes("pelargonie")) return "Pelargonie";
+  if (normalized.includes("hydrangea") || normalized.includes("hortenzie")) return "Hydrangea";
+  if (/(buxus|buddleja|carex|chamaecyparis|cortaderia|cupressus|euonymus|fargesia|festuca|hedera|laurus|nandina|nerium|platycladus|rhododendron|taxus|thuja|avenella)/.test(normalized)) return "Zahradní rostliny";
+  if (/(aeonium|ajuga|calocephalus|dichondra|nephrolepis|sedum|sempervivum)/.test(normalized)) return "Ostatní";
+  return "Květiny";
+}
+
+const productUpdate20June = productUpdate20JuneImages.map((image, index) => {
+  const filename = image.split("/").pop().replace(/\.[^.]+$/, "").trim();
+  const match = filename.match(/^(.*?)\s+giá\s+(\d+)\s*kc$/i);
+  const name = (match ? match[1] : filename).replace(/\s+/g, " ").trim();
+  const price = match ? Number(match[2]) : 0;
+
+  return {
+    id: 29 + index,
+    name,
+    price,
+    category: productCategoryForName(name),
+    image,
+    description: `${name} z nové nabídky 20. 6., připravené k osobnímu výběru v zahradnictví.`,
+    badge: index < 12 ? "Novinka" : ""
+  };
+});
+
+products.unshift(...productUpdate20June);
+
 const galleryImages = [
+  "Hoa mới update 20-6/Angelonia Trio k12 giá 68kc.jpg",
+  "Hoa mới update 20-6/Lavandule k26 giá 240kc.jpg",
+  "Hoa mới update 20-6/Rosa on stem k19 giá 349kc.jpg",
+  "Hoa mới update 20-6/Thuja k27 giá 499kc.jpg",
   "Chrysantemum k23 5color.jpg",
   "Hydragea k23 mix color.jpg",
   "Levandule pack 6.jpg",
@@ -55,6 +187,8 @@ let activeCategory = "all";
 let cart = JSON.parse(localStorage.getItem("abcGardenCart") || "[]");
 let currentReview = 0;
 let reviewTimer = null;
+let lightboxItems = [];
+let currentLightboxIndex = 0;
 
 const el = (id) => document.getElementById(id);
 const money = (value) => `${value} Kč`;
@@ -74,13 +208,14 @@ function safeImage(img) {
 function productCard(product, index = 0) {
   return `
     <article class="product-card" style="--i:${index}">
-      <div class="product-image">
+      <button type="button" class="product-image product-image-button" onclick="openProductImage(${product.id})" aria-label="Zobrazit větší fotografii ${product.name}">
         ${product.badge ? `<span class="badge">${product.badge}</span>` : ""}
         <span class="product-sprout sprout-one" aria-hidden="true"></span>
         <span class="product-sprout sprout-two" aria-hidden="true"></span>
         <span class="product-sprout sprout-three" aria-hidden="true"></span>
         <img src="${product.image}" alt="${product.name}" loading="lazy" onerror="safeImage(this)">
-      </div>
+        <span class="image-zoom-label">Zvětšit</span>
+      </button>
       <div class="product-body">
         <h3>${product.name}</h3>
         <p>${product.description}</p>
@@ -366,17 +501,84 @@ function closeProductModal() {
 
 function renderGallery() {
   el("galleryGrid").innerHTML = galleryImages.map((src, index) => `
-    <button type="button" class="gallery-item gallery-item-${index + 1}" onclick="openLightbox('${src}')" style="--i:${index}">
+    <button type="button" class="gallery-item gallery-item-${index + 1}" onclick="openGalleryLightbox(${index})" style="--i:${index}">
       <img src="${src}" alt="Galerie ${index + 1}" loading="lazy" onerror="safeImage(this)">
       <span>${src.replace(/\.[^.]+$/, "").replace(/-/g, " ")}</span>
     </button>
   `).join("");
 }
 
+function productLightboxItem(product) {
+  return {
+    src: product.image,
+    alt: product.name,
+    title: product.name,
+    meta: `${product.category} · ${money(product.price)}`,
+    productId: product.id
+  };
+}
+
+function galleryLightboxItem(src) {
+  const product = products.find((item) => item.image === src);
+  if (product) return productLightboxItem(product);
+  const title = src.split("/").pop().replace(/\.[^.]+$/, "").replace(/-/g, " ").trim();
+  return { src, alt: title, title, meta: "Galerie", productId: null };
+}
+
+function openProductImage(productId) {
+  const list = filteredProducts();
+  const startIndex = Math.max(0, list.findIndex((product) => product.id === productId));
+  openLightboxItems(list.map(productLightboxItem), startIndex);
+}
+
+function openGalleryLightbox(index) {
+  openLightboxItems(galleryImages.map(galleryLightboxItem), index);
+}
+
 function openLightbox(src) {
-  el("lightboxImage").src = src;
+  openLightboxItems([galleryLightboxItem(src)], 0);
+}
+
+function openLightboxItems(items, startIndex = 0) {
+  lightboxItems = items.length ? items : [];
+  currentLightboxIndex = Math.min(Math.max(startIndex, 0), Math.max(lightboxItems.length - 1, 0));
+  renderLightbox();
   el("lightbox").classList.add("show");
   el("lightbox").setAttribute("aria-hidden", "false");
+}
+
+function renderLightbox() {
+  const item = lightboxItems[currentLightboxIndex];
+  if (!item) return;
+  el("lightboxImage").src = item.src;
+  el("lightboxImage").alt = item.alt || item.title || "Galerie";
+  el("lightboxCaption").innerHTML = `
+    <span>${currentLightboxIndex + 1} / ${lightboxItems.length}</span>
+    <strong>${item.title || ""}</strong>
+    <small>${item.meta || ""}</small>
+    ${item.productId ? `<div class="lightbox-actions">
+      <button class="btn primary" onclick="addLightboxProduct(${item.productId}, this)">Přidat do košíku</button>
+      <button class="btn outline" onclick="openProductModalFromLightbox(${item.productId})">Detail</button>
+    </div>` : ""}
+  `;
+  el("prevLightbox").style.display = lightboxItems.length > 1 ? "grid" : "none";
+  el("nextLightbox").style.display = lightboxItems.length > 1 ? "grid" : "none";
+}
+
+function moveLightbox(delta) {
+  if (!lightboxItems.length) return;
+  currentLightboxIndex = (currentLightboxIndex + delta + lightboxItems.length) % lightboxItems.length;
+  renderLightbox();
+}
+
+function openProductModalFromLightbox(productId) {
+  closeLightbox();
+  openProductModal(productId);
+}
+
+function addLightboxProduct(productId, sourceButton = null) {
+  closeLightbox();
+  addToCart(productId, 1, sourceButton);
 }
 
 function closeLightbox() {
@@ -476,10 +678,16 @@ function initEvents() {
   el("productModal").addEventListener("click", (event) => { if (event.target === el("productModal")) closeProductModal(); });
   el("closeLightbox").addEventListener("click", closeLightbox);
   el("lightbox").addEventListener("click", (event) => { if (event.target === el("lightbox")) closeLightbox(); });
+  el("prevLightbox").addEventListener("click", () => moveLightbox(-1));
+  el("nextLightbox").addEventListener("click", () => moveLightbox(1));
   el("prevReview").addEventListener("click", () => { currentReview = (currentReview + reviews.length - 1) % reviews.length; renderReview(); restartReviewTimer(); });
   el("nextReview").addEventListener("click", () => { currentReview = (currentReview + 1) % reviews.length; renderReview(); restartReviewTimer(); });
   el("orderForm").addEventListener("submit", submitOrder);
   document.addEventListener("keydown", (event) => {
+    if (el("lightbox").classList.contains("show")) {
+      if (event.key === "ArrowLeft") moveLightbox(-1);
+      if (event.key === "ArrowRight") moveLightbox(1);
+    }
     if (event.key === "Escape") {
       closeProductModal();
       closeLightbox();

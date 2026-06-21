@@ -337,7 +337,12 @@
 
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <button id="closeLightbox" aria-label="Zavřít galerii">×</button>
-    <img id="lightboxImage" src="" alt="Galerie">
+    <button class="lightbox-nav lightbox-prev" id="prevLightbox" aria-label="Předchozí obrázek">‹</button>
+    <figure class="lightbox-frame">
+      <img id="lightboxImage" src="" alt="Galerie">
+      <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+    </figure>
+    <button class="lightbox-nav lightbox-next" id="nextLightbox" aria-label="Další obrázek">›</button>
   </div>
 
   <footer class="site-footer">
