@@ -244,6 +244,14 @@ let currentReview = 0;
 let reviewTimer = null;
 let lightboxItems = [];
 let currentLightboxIndex = 0;
+let lightboxZoom = 1;
+let lightboxOffsetX = 0;
+let lightboxOffsetY = 0;
+let lightboxDrag = null;
+
+const LIGHTBOX_MIN_ZOOM = 1;
+const LIGHTBOX_MAX_ZOOM = 4;
+const LIGHTBOX_ZOOM_STEP = 0.35;
 
 const el = (id) => document.getElementById(id);
 const money = (value) => `${value} Kč`;
@@ -525,7 +533,10 @@ function openProductModal(productId) {
   if (!product) return;
   el("modalBody").innerHTML = `
     <div class="modal-product">
-      <img src="${product.image}" alt="${product.name}" onerror="safeImage(this)">
+      <button type="button" class="modal-product-image" onclick="openSingleProductImage(${product.id})" aria-label="Zobrazit větší fotografii ${product.name}">
+        <img src="${product.image}" alt="${product.name}" onerror="safeImage(this)">
+        <span class="image-zoom-label">Zvětšit</span>
+      </button>
       <div>
         <p class="eyebrow">${product.category}</p>
         <h2>${product.name}</h2>
@@ -580,10 +591,79 @@ function galleryLightboxItem(src) {
   return { src, alt: title, title, meta: "Galerie", productId: null };
 }
 
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
+
+function updateLightboxZoom() {
+  const image = el("lightboxImage");
+  if (!image) return;
+  if (lightboxZoom <= LIGHTBOX_MIN_ZOOM + 0.01) {
+    lightboxZoom = LIGHTBOX_MIN_ZOOM;
+    lightboxOffsetX = 0;
+    lightboxOffsetY = 0;
+  }
+  image.style.transform = `translate3d(${lightboxOffsetX}px, ${lightboxOffsetY}px, 0) scale(${lightboxZoom})`;
+  image.classList.toggle("is-zoomed", lightboxZoom > LIGHTBOX_MIN_ZOOM + 0.01);
+  const zoomValue = el("lightboxZoomValue");
+  if (zoomValue) zoomValue.textContent = `${Math.round(lightboxZoom * 100)}%`;
+  const zoomOut = el("zoomOutLightbox");
+  const zoomIn = el("zoomInLightbox");
+  if (zoomOut) zoomOut.disabled = lightboxZoom <= LIGHTBOX_MIN_ZOOM + 0.01;
+  if (zoomIn) zoomIn.disabled = lightboxZoom >= LIGHTBOX_MAX_ZOOM - 0.01;
+}
+
+function resetLightboxZoom() {
+  lightboxZoom = LIGHTBOX_MIN_ZOOM;
+  lightboxOffsetX = 0;
+  lightboxOffsetY = 0;
+  lightboxDrag = null;
+  updateLightboxZoom();
+}
+
+function zoomLightbox(delta) {
+  lightboxZoom = clamp(lightboxZoom + delta, LIGHTBOX_MIN_ZOOM, LIGHTBOX_MAX_ZOOM);
+  updateLightboxZoom();
+}
+
+function startLightboxDrag(event) {
+  if (lightboxZoom <= LIGHTBOX_MIN_ZOOM + 0.01) return;
+  const image = el("lightboxImage");
+  lightboxDrag = {
+    pointerId: event.pointerId,
+    startX: event.clientX,
+    startY: event.clientY,
+    originX: lightboxOffsetX,
+    originY: lightboxOffsetY
+  };
+  image.setPointerCapture?.(event.pointerId);
+  image.classList.add("is-dragging");
+  event.preventDefault();
+}
+
+function moveLightboxDrag(event) {
+  if (!lightboxDrag || lightboxDrag.pointerId !== event.pointerId) return;
+  lightboxOffsetX = lightboxDrag.originX + event.clientX - lightboxDrag.startX;
+  lightboxOffsetY = lightboxDrag.originY + event.clientY - lightboxDrag.startY;
+  updateLightboxZoom();
+}
+
+function endLightboxDrag(event) {
+  if (!lightboxDrag || lightboxDrag.pointerId !== event.pointerId) return;
+  el("lightboxImage").classList.remove("is-dragging");
+  lightboxDrag = null;
+}
+
 function openProductImage(productId) {
   const list = filteredProducts();
   const startIndex = Math.max(0, list.findIndex((product) => product.id === productId));
   openLightboxItems(list.map(productLightboxItem), startIndex);
+}
+
+function openSingleProductImage(productId) {
+  const product = products.find((item) => item.id === productId);
+  if (!product) return;
+  openLightboxItems([productLightboxItem(product)], 0);
 }
 
 function openGalleryLightbox(index) {
@@ -607,6 +687,7 @@ function renderLightbox() {
   if (!item) return;
   el("lightboxImage").src = item.src;
   el("lightboxImage").alt = item.alt || item.title || "Galerie";
+  resetLightboxZoom();
   el("lightboxCaption").innerHTML = `
     <span>${currentLightboxIndex + 1} / ${lightboxItems.length}</span>
     <strong>${item.title || ""}</strong>
@@ -735,6 +816,32 @@ function initEvents() {
   el("lightbox").addEventListener("click", (event) => { if (event.target === el("lightbox")) closeLightbox(); });
   el("prevLightbox").addEventListener("click", () => moveLightbox(-1));
   el("nextLightbox").addEventListener("click", () => moveLightbox(1));
+  el("zoomInLightbox").addEventListener("click", () => zoomLightbox(LIGHTBOX_ZOOM_STEP));
+  el("zoomOutLightbox").addEventListener("click", () => zoomLightbox(-LIGHTBOX_ZOOM_STEP));
+  el("resetZoomLightbox").addEventListener("click", resetLightboxZoom);
+  el("lightboxImage").addEventListener("wheel", (event) => {
+    if (!el("lightbox").classList.contains("show")) return;
+    event.preventDefault();
+    zoomLightbox(event.deltaY < 0 ? LIGHTBOX_ZOOM_STEP : -LIGHTBOX_ZOOM_STEP);
+  }, { passive: false });
+  el("lightboxImage").addEventListener("dblclick", () => {
+    if (lightboxZoom > LIGHTBOX_MIN_ZOOM + 0.01) resetLightboxZoom();
+    else {
+      lightboxZoom = 2;
+      updateLightboxZoom();
+    }
+  });
+  el("lightboxImage").addEventListener("pointerdown", startLightboxDrag);
+  el("lightboxImage").addEventListener("pointermove", moveLightboxDrag);
+  el("lightboxImage").addEventListener("pointerup", endLightboxDrag);
+  el("lightboxImage").addEventListener("pointercancel", endLightboxDrag);
+  document.querySelectorAll(".hero-image-panel img, .hero-flower-collage img, .about-section img").forEach((image) => {
+    image.classList.add("zoomable-page-image");
+    image.addEventListener("click", () => {
+      const title = image.alt || "Fotografie";
+      openLightboxItems([{ src: image.currentSrc || image.src, alt: title, title, meta: "Galerie", productId: null }], 0);
+    });
+  });
   el("prevReview").addEventListener("click", () => { currentReview = (currentReview + reviews.length - 1) % reviews.length; renderReview(); restartReviewTimer(); });
   el("nextReview").addEventListener("click", () => { currentReview = (currentReview + 1) % reviews.length; renderReview(); restartReviewTimer(); });
   el("orderForm").addEventListener("submit", submitOrder);
@@ -742,6 +849,9 @@ function initEvents() {
     if (el("lightbox").classList.contains("show")) {
       if (event.key === "ArrowLeft") moveLightbox(-1);
       if (event.key === "ArrowRight") moveLightbox(1);
+      if (event.key === "+" || event.key === "=") zoomLightbox(LIGHTBOX_ZOOM_STEP);
+      if (event.key === "-") zoomLightbox(-LIGHTBOX_ZOOM_STEP);
+      if (event.key === "0") resetLightboxZoom();
     }
     if (event.key === "Escape") {
       closeProductModal();

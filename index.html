@@ -337,9 +337,17 @@
 
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <button id="closeLightbox" aria-label="Zavřít galerii">×</button>
+    <div class="lightbox-toolbar" aria-label="Ovládání přiblížení">
+      <button type="button" id="zoomOutLightbox" aria-label="Oddálit">-</button>
+      <span id="lightboxZoomValue">100%</span>
+      <button type="button" id="zoomInLightbox" aria-label="Přiblížit">+</button>
+      <button type="button" id="resetZoomLightbox" aria-label="Obnovit velikost">100</button>
+    </div>
     <button class="lightbox-nav lightbox-prev" id="prevLightbox" aria-label="Předchozí obrázek">‹</button>
     <figure class="lightbox-frame">
-      <img id="lightboxImage" src="" alt="Galerie">
+      <div class="lightbox-image-stage" id="lightboxImageStage">
+        <img id="lightboxImage" src="" alt="Galerie">
+      </div>
       <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
     </figure>
     <button class="lightbox-nav lightbox-next" id="nextLightbox" aria-label="Další obrázek">›</button>
