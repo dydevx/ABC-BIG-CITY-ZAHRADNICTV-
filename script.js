@@ -133,37 +133,92 @@ const productUpdate20JuneImages = [
   "Hoa mới update 20-6/Zantedeschia k14 giá 136kc.jpg"
 ];
 
+const productUpdate2JulyImages = [
+  "Hoa m\u1edbi update 2-7/Aloe k10 gi\u00e1 85kc.jpg",
+  "Hoa m\u1edbi update 2-7/Anthurium k12 gi\u00e1 94kc.jpg",
+  "Hoa m\u1edbi update 2-7/Beaucarnea k19 gi\u00e1 256kc.jpg",
+  "Hoa m\u1edbi update 2-7/Bonsai metasequoia k23 gi\u00e1 484kc.jpg",
+  "Hoa m\u1edbi update 2-7/Cactaceae k12 gi\u00e1 95kc.jpg",
+  "Hoa m\u1edbi update 2-7/Cactaceae k13 gi\u00e1 109kc.jpg",
+  "Hoa m\u1edbi update 2-7/Cactaceae oriental k10 gi\u00e1 96kc.jpg",
+  "Hoa m\u1edbi update 2-7/Calamondin k14 gi\u00e1 235kc.jpg",
+  "Hoa m\u1edbi update 2-7/Calathea k15 gi\u00e1 143kc.jpg",
+  "Hoa m\u1edbi update 2-7/Canna k17 gi\u00e1 189kc.jpg",
+  "Hoa m\u1edbi update 2-7/Celosia k17 gi\u00e1 119.jpg",
+  "Hoa m\u1edbi update 2-7/Chamaedorea k9 gi\u00e1 29kc.jpg",
+  "Hoa m\u1edbi update 2-7/Chlorophytum k12 gi\u00e1 66kc.jpg",
+  "Hoa m\u1edbi update 2-7/Coleus k23 gi\u00e1 150kc.jpg",
+  "Hoa m\u1edbi update 2-7/Curcuma k14 gi\u00e1 147kc.jpg",
+  "Hoa m\u1edbi update 2-7/Cyclamen k10 gi\u00e1 54kc.jpg",
+  "Hoa m\u1edbi update 2-7/Delphinium k17 gi\u00e1 122kc.jpg",
+  "Hoa m\u1edbi update 2-7/Diathus k19 gi\u00e1 161kc.jpg",
+  "Hoa m\u1edbi update 2-7/Dieffenbachia k12 gi\u00e1 72kc.jpg",
+  "Hoa m\u1edbi update 2-7/Dracaena k12 gi\u00e1 63kc.jpg",
+  "Hoa m\u1edbi update 2-7/Dypsis k21 gi\u00e1 810kc.jpg",
+  "Hoa m\u1edbi update 2-7/Epipremnum k12 gi\u00e1 65kc.jpg",
+  "Hoa m\u1edbi update 2-7/Epipremnum mosstok k17 gi\u00e1 266kc.jpg",
+  "Hoa m\u1edbi update 2-7/Gaura k23 gi\u00e1 150kc.jpg",
+  "Hoa m\u1edbi update 2-7/Gerbera k12 gi\u00e1 34kc.jpg",
+  "Hoa m\u1edbi update 2-7/Hibiscus extreme k23 gi\u00e1  259 kc.jpg",
+  "Hoa m\u1edbi update 2-7/Hoya k12 gi\u00e1 54kc.jpg",
+  "Hoa m\u1edbi update 2-7/Hydragea k14 81kc.jpg",
+  "Hoa m\u1edbi update 2-7/Juncus k17 gi\u00e1 94kc.jpg",
+  "Hoa m\u1edbi update 2-7/Maranta k13 gi\u00e1 71kc.jpg",
+  "Hoa m\u1edbi update 2-7/Molinia k19 gi\u00e1 183kc.jpg",
+  "Hoa m\u1edbi update 2-7/Monstera k21 gi\u00e1 332kc.jpg",
+  "Hoa m\u1edbi update 2-7/Orchidej k12 gi\u00e1 199kc.jpg",
+  "Hoa m\u1edbi update 2-7/Pennisetum k19 gi\u00e1 191kc.jpg",
+  "Hoa m\u1edbi update 2-7/Peperomia k12 gi\u00e1 59kc.jpg",
+  "Hoa m\u1edbi update 2-7/Peperomia k12 gi\u00e1 95kc.jpg",
+  "Hoa m\u1edbi update 2-7/Philodendron k24 gi\u00e1 599kc.jpg",
+  "Hoa m\u1edbi update 2-7/Rhipsalis 3 typ mix k10 gi\u00e1 70kc 1 c\u1ed1c.jpg",
+  "Hoa m\u1edbi update 2-7/Salvia k17 gi\u00e1 92kc.jpg",
+  "Hoa m\u1edbi update 2-7/Sansevieria k17 gi\u00e1 266kc.jpg",
+  "Hoa m\u1edbi update 2-7/Schlumbergera k9 gi\u00e1 29kc.jpg",
+  "Hoa m\u1edbi update 2-7/Senecio k12 gi\u00e1 74kc.jpg",
+  "Hoa m\u1edbi update 2-7/Soleirolia k13 gi\u00e1 62kc.jpg",
+  "Hoa m\u1edbi update 2-7/Yucca k21 gi\u00e1 342kc.jpg"
+];
+
 function productCategoryForName(name) {
   const normalized = normalizeText(name);
   if (normalized.includes("lavandule")) return "Levandule";
   if (normalized.includes("salvia")) return "Salvia";
   if (normalized.includes("pelargonie")) return "Pelargonie";
-  if (normalized.includes("hydrangea") || normalized.includes("hortenzie")) return "Hydrangea";
-  if (/(buxus|buddleja|carex|chamaecyparis|cortaderia|cupressus|euonymus|fargesia|festuca|hedera|laurus|nandina|nerium|platycladus|rhododendron|taxus|thuja|avenella)/.test(normalized)) return "Zahradní rostliny";
-  if (/(aeonium|ajuga|calocephalus|dichondra|nephrolepis|sedum|sempervivum)/.test(normalized)) return "Ostatní";
+  if (/(hydrangea|hydragea|hortenzie)/.test(normalized)) return "Hydrangea";
+  if (/(buxus|buddleja|carex|chamaecyparis|cortaderia|cupressus|euonymus|fargesia|festuca|hedera|juncus|laurus|molinia|nandina|nerium|pennisetum|platycladus|rhododendron|taxus|thuja|avenella|yucca)/.test(normalized)) return "Zahradní rostliny";
+  if (/(aeonium|agave|ajuga|aloe|anthurium|beaucarnea|bonsai|cactaceae|calamondin|calathea|calocephalus|chamaedorea|chlorophytum|dichondra|dieffenbachia|dracaena|dypsis|epipremnum|hoya|maranta|monstera|nephrolepis|orchidej|peperomia|philodendron|rhipsalis|sansevieria|schlumbergera|sedum|sempervivum|senecio|soleirolia)/.test(normalized)) return "Ostatní";
   return "Květiny";
 }
 
-const productUpdate20June = productUpdate20JuneImages.map((image, index) => {
+function productFromImage(image, id, updateLabel, index) {
   const filename = image.split("/").pop().replace(/\.[^.]+$/, "").trim();
-  const match = filename.match(/^(.*?)\s+giá\s+(\d+)\s*kc$/i);
-  const name = (match ? match[1] : filename).replace(/\s+/g, " ").trim();
-  const price = match ? Number(match[2]) : 0;
+  const normalizedFilename = normalizeText(filename);
+  const priceMatch = normalizedFilename.match(/\bgia\s+(\d+)(?:\s*kc)?\b/i) || normalizedFilename.match(/\s(\d+)\s*kc\b/i);
+  const name = (priceMatch ? filename.slice(0, priceMatch.index) : filename).replace(/\s+/g, " ").trim();
+  const price = priceMatch ? Number(priceMatch[1]) : 0;
 
   return {
-    id: 29 + index,
+    id,
     name,
     price,
     category: productCategoryForName(name),
     image,
-    description: `${name} z nové nabídky 20. 6., připravené k osobnímu výběru v zahradnictví.`,
+    description: `${name} z nové nabídky ${updateLabel}, připravené k osobnímu výběru v zahradnictví.`,
     badge: index < 12 ? "Novinka" : ""
   };
-});
+}
 
+const productUpdate20June = productUpdate20JuneImages.map((image, index) => productFromImage(image, 29 + index, "20. 6.", index));
+const productUpdate2July = productUpdate2JulyImages.map((image, index) => productFromImage(image, 29 + productUpdate20JuneImages.length + index, "2. 7.", index));
 products.unshift(...productUpdate20June);
+products.unshift(...productUpdate2July);
 
 const galleryImages = [
+  "Hoa m\u1edbi update 2-7/Monstera k21 gi\u00e1 332kc.jpg",
+  "Hoa m\u1edbi update 2-7/Orchidej k12 gi\u00e1 199kc.jpg",
+  "Hoa m\u1edbi update 2-7/Philodendron k24 gi\u00e1 599kc.jpg",
+  "Hoa m\u1edbi update 2-7/Hibiscus extreme k23 gi\u00e1  259 kc.jpg",
   "Hoa mới update 20-6/Angelonia Trio k12 giá 68kc.jpg",
   "Hoa mới update 20-6/Lavandule k26 giá 240kc.jpg",
   "Hoa mới update 20-6/Rosa on stem k19 giá 349kc.jpg",
